@@ -92,21 +92,21 @@ class AuditFileWriter(object):
 	def output_to_file(self):
 		with open(self.output, 'a+') as output_file:
 			for header_file in self.audit_list:
+				output_file.write('==================================\n')
 				output_file.write(header_file.name)
+				output_file.write('\n')
+				output_file.write('**********************************\n')
 				if header_file.has_properties():
-					output_file.write('\n')
 					output_file.write('Properties:\n')
-					output_file.write(str(header_file.properties))
 					for property_item in header_file.properties:
 						output_file.write("%s\n" % property_item)
 				if header_file.has_methods():
-					output_file.write('\n')
+					output_file.write('----------------------------------\n')
 					output_file.write('Methods:\n')
 					for method_item in header_file.methods:
 						output_file.write("%s\n" % method_item)
+				output_file.write('==================================\n')
 				output_file.write('\n')
-					# output_file.write(str(header_file.methods))
-					# output_file.write('\n')
 
 
 def main():
