@@ -91,7 +91,6 @@ class AuditFileWriter(object):
 		self.output = output
 	def output_to_file(self):
 		with open(self.output, 'a+') as output_file:
-			output_file.write('testing')
 			for header_file in self.audit_list:
 				output_file.write(header_file.name)
 				if header_file.has_properties():
@@ -105,6 +104,7 @@ class AuditFileWriter(object):
 					output_file.write('Methods:\n')
 					for method_item in header_file.methods:
 						output_file.write("%s\n" % method_item)
+				output_file.write('\n')
 					# output_file.write(str(header_file.methods))
 					# output_file.write('\n')
 
