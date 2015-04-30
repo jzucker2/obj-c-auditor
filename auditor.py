@@ -98,7 +98,6 @@ class AuditFileWriter(object):
 				output_file.write('==================================\n')
 				output_file.write(header_file.name)
 				output_file.write('\n')
-				output_file.write('**********************************\n')
 				if header_file.has_properties():
 					output_file.write('Properties:\n')
 					for property_item in header_file.properties:
