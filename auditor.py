@@ -51,7 +51,8 @@ class HeaderFileParser(object):
 	def __set_header_file_as_string(self):
 		self.header_file_string = get_file_as_string(self.header_file_path)
 	def __get_methods(self):
-		method_pattern = re.compile('^[-\+](?=\s*\().*?;', flags=re.MULTILINE|re.DOTALL)
+		method_pattern = re.compile('(?<!=\s)^[-\+](?=\s*\()[^{}]*?;', flags=re.MULTILINE|re.DOTALL)
+		# method_pattern = re.compile('^[-\+](?=\s*\().*?;', flags=re.MULTILINE|re.DOTALL)
 		if not self.header_file_string:
 			self.__set_header_file_as_string()
 		matches = method_pattern.findall(self.header_file_string)
@@ -70,9 +71,11 @@ class HeaderFileParser(object):
 	def has_properties(self):
 		if self.properties:
 			return (0 < len(self.properties))
+		return False
 	def has_methods(self):
 		if self.methods:
 			return (0 < len(self.methods))
+		return False
 		# header_file_dict = {}
 		# methods = self.get_methods
 		# properties = self.get_properties
@@ -129,7 +132,7 @@ def main():
 		# only add files that have methods or properties
 		if (header_file_overview.process()):
 			audit_list.append(header_file_overview)
-	print len(audit_list)
+	print 'header files with public methods and/or properties ' + str(len(audit_list))
 	# for thingy in audit_list:
 	# 	print "==========="
 	# 	print thingy.name
